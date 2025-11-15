@@ -19,6 +19,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].StockLevel)
             </th>
+            <th>Status</th>
             <th></th>
         </tr>
     </thead>
@@ -31,6 +32,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StockLevel)
             </td>
+                <td>
+                    @if (item.StockLevel == 0)
+                    {
+                        <span class="text-danger">Out of Stock</span>
+                    }
+                    else if (item.StockLevel < 30) // From case study hint
+                    {
+                        <span class="text-warning">Replenish Now</span>
+                    }
+                    else
+                    {
+                        <span class="text-success">Sufficient</span>
+                    }
+                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
